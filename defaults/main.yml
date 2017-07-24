@@ -1,0 +1,10 @@
+---
+
+
+JAVA_HOME: "{{ java_path.stdout }}"
+
+tomcat_service: tomcat.service
+server: server.xml
+tomcat_users: tomcat-users.xml
+
+
