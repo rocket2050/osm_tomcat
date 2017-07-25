@@ -53,7 +53,7 @@
     group: tomcat
     mode: 0775
   become: true
-  when: tomcat_present.stdout == 0
+ # when: tomcat_present.stdout == 0
   tags: directory_creation
   
 - unarchive:
