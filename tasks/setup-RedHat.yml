@@ -79,19 +79,31 @@
 
 # Copy Tomcat.service file in order to make it a service
 - name: copy tomcat.service file
-  copy: src= "{{ tomcat_service }}" dest=/etc/systemd/system/tomcat.service  owner=tomcat group=tomcat
+  template:
+    src: "{{ tomcat_service }}"
+    dest: /etc/systemd/system/tomcat.service
+    owner: tomcat
+    group: tomcat
   become: true
   tags: copying_tomcat_service
 
 # copy tomcat server.xml file
 - name: copy the tomcat8 server file
-  copy: src= "{{ server }}"  dest=/etc/tomcat/  owner=tomcat  group=tomcat
+  template:
+    src: "{{ server }}"
+    dest: /etc/tomcat/
+    owner: tomcat
+    group: tomcat
   become: true
   tags: copying_server_xml
 
 # copy tomcat user.xml file
 - name: copy the tomcat8 users file
-  copy: src= "{{ tomcat_users }}" dest=/etc/tomcat/  owner=tomcat  group=tomcat
+  template:
+    src: "{{ tomcat_users }}"
+    dest: /etc/tomcat/
+    owner: tomcat
+    group: tomcat
   become: true
   notify:
    - restart_tomcat8
