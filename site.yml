@@ -2,4 +2,4 @@
 - hosts: "{{ host }}"
 
   roles:
-    - role: tomcat7
+    - role: tomcat
