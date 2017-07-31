@@ -32,63 +32,48 @@
     append=yes
   become: true
   tags: tomcat_user
-
-
-- name: Download Tomcat and save it into /tmp folder
-  get_url:
-    url: "{{ tomcat8_package_url }}"
-    dest: /tmp/
-  become: true
-  tags: tomcat_download
-
-- name: check folder exists or not
-  shell: ls -l /opt/ | grep tomcat | awk {'print $9'}
-  register: tomcat_present
-
-- name:  Make a directory for Tomcat & extract into a particular folder
-  file:
-    path: /opt/tomcat
-    state: directory
-    owner: tomcat
-    group: tomcat
-    mode: 0775
-  become: true
- # when: tomcat_present.stdout == 0
-  tags: directory_creation
-  
-- unarchive:
-    src: /tmp/apache-tomcat-8.5.16.tar.gz
-    dest: /opt/tomcat/
-    remote_src: True
-  tags: tomcat_installation
   
 - name: get the java_path
   shell: sudo update-java-alternatives -l | awk '{print $3}'
   register: java_path
   tags: getting_java_home
 
-# make a directory for Tomcat Server and User Files
-- name:  Make a directory for Tomcat Server and User Files
-  file:
-    path: /etc/tomcat
-    state: directory
-    owner: tomcat
-    group: tomcat
-    mode: 0775
-  tags: directory_creation
-
-# Copy Tomcat.service file in order to make it a service
-- name: copy tomcat.service file
-  template:
-    src: "{{ tomcat_service }}"
-    dest: /etc/systemd/system/tomcat.service
-    owner: tomcat
-    group: tomcat
+- name: Install Tomcat 7 onto the server
+  yum:
+   name: tomcat
+   state: present
   become: true
-  tags: copying_tomcat_service
+
+- name: add a line in tomcat.conf file
+  lineinfile:
+    dest: /usr/share/tomcat/conf/tomcat.conf
+    line: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"'
+    mode: 0775
+  become: true
+
+- name: Install Admin Packages
+  yum:
+   name: "{{ item }}"
+   state: present
+  become: true
+  with_items:
+   - tomcat-webapps
+   - tomcat-admin-webapps
+   - tomcat-docs-webapp
+   - tomcat-javadoc
+  
+# Copy Tomcat.service file in order to make it a service
+#- name: copy tomcat.service file
+#  template:
+#    src: "{{ tomcat_service }}"
+#    dest: /etc/systemd/system/tomcat.service
+#    owner: tomcat
+#    group: tomcat
+#  become: true
+#  tags: copying_tomcat_service
 
 # copy tomcat server.xml file
-- name: copy the tomcat8 server file
+- name: copy the tomcat server file
   template:
     src: "{{ server }}"
     dest: /etc/tomcat/
@@ -98,7 +83,7 @@
   tags: copying_server_xml
 
 # copy tomcat user.xml file
-- name: copy the tomcat8 users file
+- name: copy the tomcat users file
   template:
     src: "{{ tomcat_users }}"
     dest: /etc/tomcat/
@@ -106,5 +91,5 @@
     group: tomcat
   become: true
   notify:
-   - restart_tomcat8
+   - restart_tomcat_redhat
   tags: copying_user_xml

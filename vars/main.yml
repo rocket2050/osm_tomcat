@@ -1,21 +1,21 @@
 ---
 
 # Variables for Tomcat and Java 
-tomcat8_package_url: "http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz"
+#tomcat8_package_url: "http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz"
 JAVA_HOME: "/usr/lib/jvm/java-7-openjdk-amd64/bin/java"
 java_version: openjdk-7-jdk
-tomcat8_packages:
-  - tomcat
-  - tomcat-admin-webapps
-  - tomcat-webapps
+#tomcat8_packages:
+# - tomcat
+#  - tomcat-admin-webapps
+#  - tomcat-webapps
 
-tomcat8_package_url: "http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz"
+#tomcat8_package_url: "http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz"
 tomcat_username: "tomcat"
 tomcat_password: "tomcat"
-tomcat8_hostname: "{{ host }}"
-tomcat8_server_port: 8005
-tomcat8_catalina_port: 8081
-tomcat8_catalina_redirect_port: 8443
-tomcat8_ajp_port: 8009
-tomcat8_uriencoding: ""
+tomcat_hostname: "{{ ansible_host }}"
+tomcat_server_port: 8005
+tomcat_catalina_port: 8081
+tomcat_catalina_redirect_port: 8443
+tomcat_ajp_port: 8009
+tomcat_uriencoding: ""
 
