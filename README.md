@@ -4,7 +4,7 @@ This repo controls the Ansible Role for Tomcat.
 
 # Role Name
 
-A brief description of the role goes here.
+This role consist of all the dependencies that are required to setup Tomcat on Ubuntu and Centos.
 
 # Requirements
 
