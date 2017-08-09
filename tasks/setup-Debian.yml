@@ -87,7 +87,7 @@
 - name: copy the tomcat server file
   template: 
     src: "{{ server }}"
-    dest: /etc/tomcat/  
+    dest: /etc/tomcat7/  
     owner: tomcat  
     group: tomcat 
   become: true
@@ -97,7 +97,7 @@
 - name: copy the tomcat users file
   template: 
     src: "{{ tomcat_users }}" 
-    dest: /etc/tomcat/  
+    dest: /etc/tomcat7/  
     owner: tomcat  
     group: tomcat
   become: true
