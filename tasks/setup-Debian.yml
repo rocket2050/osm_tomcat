@@ -71,7 +71,7 @@
    - tomcat7-docs
    - tomcat7-admin
    - tomcat7-examples
-  #notify: restart_tomcat_debian
+ 
 
 # Copy Tomcat.service file in order to make it a service
 #- name: copy tomcat.service file
@@ -101,7 +101,11 @@
     owner: tomcat  
     group: tomcat
   become: true
-  notify:
-   - restart_tomcat_debian
   tags: copying_user_xml
 
+- name: start tomcat7 on server
+  service:
+    name: tomcat7
+    state: started
+    enabled: true
+  become: true
