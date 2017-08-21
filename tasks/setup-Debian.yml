@@ -5,6 +5,13 @@
   register: java_task_installed
   changed_when: java_task_installed.rc != 0
   failed_when: no
+  
+- name: Add the ppa repo for Java 7
+  apt_repository:
+    repo: ppa:openjdk-r/ppa
+    state: present
+  become: true
+
 
 # Update Cache of the System
 - name: Update Cache
