@@ -2,7 +2,7 @@
 
 # Variables for Tomcat and Java 
 #tomcat8_package_url: "http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz"
-JAVA_HOME: "/usr/lib/jvm/java-7-openjdk-amd64/bin/java"
+JAVA_HOME: "/usr/lib/jvm/java-7-openjdk-amd64/bin"
 java_version: openjdk-7-jdk
 #tomcat8_packages:
 # - tomcat
