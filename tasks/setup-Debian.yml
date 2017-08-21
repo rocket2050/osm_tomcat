@@ -3,7 +3,6 @@
 - name: determine if Java is already installed
   shell: which java
   register: java_task_installed
-  changed_when: java_task_installed.rc != 0
   failed_when: no
   
 - name: Add the ppa repo for Java 7
@@ -11,7 +10,6 @@
     repo: ppa:openjdk-r/ppa
     state: present
   become: true
-
 
 # Update Cache of the System
 - name: Update Cache
@@ -36,18 +34,12 @@
   become: true 
   tags: tomcat_group
 
-#  check whether if tomcat use is already present or not
-#- name: check whether a user tomcat exists
-#  shell: "grep -c '^tomcat:' /etc/passwd"
-#  register: default_user
-
 - name: make a tomcat user if not present already and make it owner of tomcat group 
   user:
     name=tomcat
     shell=/bin/bash
     groups=tomcat
     append=yes
-#    when: default_user.stdout == 0
   tags: tomcat_user
   
 # get Java Home path 
@@ -79,17 +71,6 @@
    - tomcat7-admin
    - tomcat7-examples
  
-
-# Copy Tomcat.service file in order to make it a service
-#- name: copy tomcat.service file
-#  template: 
-#    src: "{{ tomcat_service }}" 
-#    dest: /etc/systemd/system/tomcat.service  
-#    owner: tomcat 
-#    group: tomcat
-#  become: true
-#  tags: copying_tomcat_service  
-
 # copy tomcat server.xml file
 - name: copy the tomcat server file
   template: 

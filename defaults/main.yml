@@ -2,8 +2,6 @@
 
 
 JAVA_HOME: "{{ java_path.stdout }}"
-
-tomcat_service: tomcat.service.j2
 server: server.xml.j2
 tomcat_users: tomcat-users.xml.j2
 

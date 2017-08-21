@@ -13,16 +13,12 @@
   yum: pkg=java-1.7.0-openjdk-devel state=installed
   tags: java_installation
 
-#make a tomcat group and user as we want non root user to be owner of tomcat
+# make a tomcat group and user as we want non root user to be owner of tomcat
 - name: make a tomcat group
   group:
     name: tomcat
     state: present
   tags: tomcat_group
-
-#- name: check whether a user tomcat exists
-#  shell: grep -c '^tomcat:' /etc/passwd
-#  register: default_user
 
 - name: create a tomcat user for above group
   user:
@@ -61,16 +57,6 @@
    - tomcat-admin-webapps
    - tomcat-docs-webapp
    - tomcat-javadoc
-  
-# Copy Tomcat.service file in order to make it a service
-#- name: copy tomcat.service file
-#  template:
-#    src: "{{ tomcat_service }}"
-#    dest: /etc/systemd/system/tomcat.service
-#    owner: tomcat
-#    group: tomcat
-#  become: true
-#  tags: copying_tomcat_service
 
 # copy tomcat server.xml file
 - name: copy the tomcat server file
@@ -91,5 +77,5 @@
     group: tomcat
   become: true
   notify:
-   - restart_tomcat_redhat
+   - start_tomcat_redhat
   tags: copying_user_xml
