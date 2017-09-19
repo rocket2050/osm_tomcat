@@ -8,7 +8,7 @@
 
 - name: start_tomcat_redhat
   systemd: 
-    name: tomcat 
+    name: tomcat7 
     state: started
     enabled: true
   become: true
