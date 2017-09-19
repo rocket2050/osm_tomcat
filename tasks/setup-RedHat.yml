@@ -36,13 +36,13 @@
 
 - name: Install Tomcat 7 onto the server
   yum:
-   name: tomcat
+   name: tomcat7
    state: present
   become: true
 
 - name: add a line in tomcat.conf file
   lineinfile:
-    dest: /usr/share/tomcat/conf/tomcat.conf
+    dest: /usr/share/tomcat7/conf/tomcat7.conf
     line: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"'
     mode: 0775
   become: true
@@ -53,16 +53,16 @@
    state: present
   become: true
   with_items:
-   - tomcat-webapps
-   - tomcat-admin-webapps
-   - tomcat-docs-webapp
-   - tomcat-javadoc
+   - tomcat7-webapps
+   - tomcat7-admin-webapps
+   - tomcat7-docs-webapp
+   - tomcat7-javadoc
 
 # copy tomcat server.xml file
 - name: copy the tomcat server file
   template:
     src: "{{ server }}"
-    dest: /etc/tomcat/
+    dest: /etc/tomcat7/
     owner: tomcat
     group: tomcat
   become: true
@@ -72,7 +72,7 @@
 - name: copy the tomcat users file
   template:
     src: "{{ tomcat_users }}"
-    dest: /etc/tomcat/
+    dest: /etc/tomcat7/
     owner: tomcat
     group: tomcat
   become: true
