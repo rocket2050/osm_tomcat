@@ -25,7 +25,7 @@ Including an example of how to use this role
 ```
 - hosts: "{{ host }}"
   roles:
-     - { role: osm_kibana }
+     - { role: osm_tomcat }
  ```
  
 # License
