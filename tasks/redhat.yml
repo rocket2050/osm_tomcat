@@ -40,10 +40,7 @@
 
 - name: copy the tomcat users file
   template: src=tomcat-users.xml.j2 dest=/usr/share/tomcat/conf/tomcat-users.xml owner=tomcat group=tomcat
-
-- name: To restart apache
-  service: name=httpd state=restarted
-
-- name: To start tomcat
-  service: name=tomcat state=started enabled=true
+  notify:
+    - start-tomcat
+    - start_apache
   
