@@ -1,7 +1,7 @@
 ---
 # handlers file for tomcat
 - name: restart_tomcat_debian
-  service: name=tomcat state=restarted
+  service: name=tomcat7 state=restarted
 
 - name: start-tomcat
   service: name=tomcat state=started enabled=true
