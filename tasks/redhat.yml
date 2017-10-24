@@ -46,3 +46,4 @@
 
 - name: To start tomcat
   service: name=tomcat state=started enabled=true
+  
