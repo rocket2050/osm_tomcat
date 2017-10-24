@@ -1,5 +1,5 @@
 ---
-- hosts: db
+- hosts: "{{ host }}"
   become: yes
   roles:
     - tomcat
