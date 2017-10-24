@@ -1,0 +1,38 @@
+---
+
+- name: Update Cache
+  become: true
+  apt:
+   update_cache: yes
+   cache_valid_time: 84600
+   dpkg_options: 'force-confold,force-confdef'
+  tags: update_cache
+
+- name: TO install java
+  apt: name=openjdk-8-jdk state=present
+  tags: java_installation
+
+- name: To install tomcat
+  apt: name=tomcat7 state=present
+
+- name: To add Java opts line
+  lineinfile:
+    path: /etc/default/tomcat7
+    line: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"'
+    state: present
+  tags: java_line
+
+- name: To install additional packages
+  apt: name={{ item }} state=present
+  with_items:
+    - tomcat7-docs
+    - tomcat7-admin
+    - tomcat7-examples
+    - default-jdk
+
+- name: TO copy tomcat users file
+  template: src=tomcat-users.xml.j2 dest=/etc/tomcat7/tomcat-users.xml 
+  tags: copy_user_xml
+
+- name: Start Tomcat server
+  service: name=tomcat7 state=restarted enabled=true

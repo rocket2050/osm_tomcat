@@ -1,0 +1,48 @@
+---
+
+- name: To install apache
+  yum: name=httpd state=present
+  notify:
+    - name: start_apache
+
+- name: To install java IN RedHat
+  yum: name="{{ java_version }}" state=present
+  tags: java_installation
+
+- name: add group tomcat
+  group: name=tomcat
+  tags: tomcat_group
+
+- name: ADD User Tomcat
+  user: name=tomcat group=tomcat home=/usr/share/tomcat createhome=no
+  tags: tomcat_users
+
+- name: Install Tomcat
+  yum: name=tomcat state=present
+  notify:
+    - name: start-tomcat
+
+- name: add line in tomcat.conf
+  lineinfile:
+    dest: /usr/share/tomcat/conf/tomcat.conf
+    line: 'JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"'
+    mode: 0755
+
+- name: Installl Admin Packages
+  yum: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - tomcat-webapps
+    - tomcat-admin-webapps
+#    - tomcat-docs-webapps
+    - tomcat-javadoc
+  tags: red
+
+
+- name: copy the tomcat users file
+  template: src=tomcat-users.xml.j2 dest=/usr/share/tomcat/conf/tomcat-users.xml owner=tomcat group=tomcat
+
+- name: To restart apache
+  service: name=httpd state=restarted
+
+- name: To start tomcat
+  service: name=tomcat state=started enabled=true

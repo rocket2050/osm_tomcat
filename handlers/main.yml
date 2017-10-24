@@ -1,14 +1,10 @@
 ---
-
+# handlers file for tomcat
 - name: restart_tomcat_debian
-  service:
-    name: tomcat7
-    state: restarted
-  become: true
+  service: name=tomcat state=restarted
 
-- name: start_tomcat_redhat
-  systemd: 
-    name: tomcat7 
-    state: started
-    enabled: true
-  become: true
+- name: start-tomcat
+  service: name=tomcat state=started enabled=true
+
+- name: To start_apache
+  service: name=httpd state=started enabled=true

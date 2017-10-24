@@ -1,8 +1,2 @@
 ---
-
-
-JAVA_HOME: "{{ java_path.stdout }}"
-server: server.xml.j2
-tomcat_users: tomcat-users.xml.j2
-
-
+# defaults file for tomcat

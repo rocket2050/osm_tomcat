@@ -1,16 +1,15 @@
 ---
-
-# Variables for Tomcat and Java 
+# vars file for tomcat
 
 JAVA_HOME: "/usr/lib/jvm/java-7-openjdk-amd64/bin"
-java_version: openjdk-7-jdk
 
-tomcat_username: "tomcat"
-tomcat_password: "tomcat"
-tomcat_hostname: "{{ ansible_host }}"
+java_version: java-1.7.0-openjdk
+
+tomcat_user: "admin"
+tomcat_password: "password"
+tomcat_hostname: "{{ ansible_hostname }}"
 tomcat_server_port: 8005
 tomcat_catalina_port: 8081
 tomcat_catalina_redirect_port: 8443
 tomcat_ajp_port: 8009
 tomcat_uriencoding: ""
-

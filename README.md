@@ -1,37 +1,38 @@
-# osm_tomcat
+Ansible Role for Tomcat
+=========
 
-This repo controls the Ansible Role for Tomcat.
+This an ansible role for RedHat and Debian Family
 
-# Role Name
+Requirements
+------------
 
-This role consist of all the dependencies that are required to setup Tomcat on Ubuntu and Centos.
+Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
-# Requirements
+Role Variables
+--------------
 
-None
+A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
-# Role Variables
+Dependencies
+------------
 
-Tomcat was setup using [variables](https://github.com/opstree-ansible/osm_tomcat/blob/master/vars/main.yml)
+A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-# Dependencies
+Example Playbook
+----------------
 
-None
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-# Example Playbook
+    - hosts: servers
+      roles:
+         - { role: username.rolename, x: 42 }
 
-Including an example of how to use this role
-
-```
-- hosts: "{{ host }}"
-  roles:
-     - { role: osm_kibana }
- ```
- 
-# License
+License
+-------
 
 BSD
 
-# Author Information
+Author Information
+------------------
 
-None
+An optional section for the role authors to include contact information, or a website (HTML is not allowed).
