@@ -33,7 +33,5 @@
 - name: TO copy tomcat users file
   template: src=tomcat-users.xml.j2 dest=/etc/tomcat7/tomcat-users.xml 
   tags: copy_user_xml
-
-- name: Start Tomcat server
-  service: name=tomcat7 state=restarted enabled=true
-  
+  notify:
+    - restart_tomcat_debian
