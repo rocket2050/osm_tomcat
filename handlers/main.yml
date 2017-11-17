@@ -6,5 +6,5 @@
 - name: start-tomcat
   service: name=tomcat state=started enabled=true
 
-- name: To start_apache
+- name: start_apache
   service: name=httpd state=started enabled=true
