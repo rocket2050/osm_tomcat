@@ -6,7 +6,7 @@
     - name: start_apache
 
 - name: To install java IN RedHat
-  yum: name="{{ java_version }}" state=present
+  yum: name={{ java_version }} state=present
   tags: java_installation
 
 - name: add group tomcat
